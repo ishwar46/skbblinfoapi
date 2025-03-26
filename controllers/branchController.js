@@ -98,6 +98,7 @@ exports.addBranch = async (req, res) => {
 exports.updateBranch = async (req, res) => {
   try {
     const { itemId } = req.params;
+
     const { branchName, manager, location, contact, email } = req.body;
 
     let page = await Branches.findOne();
@@ -134,6 +135,7 @@ exports.updateBranch = async (req, res) => {
 exports.deleteBranch = async (req, res) => {
   try {
     const { itemId } = req.params;
+    console.log(itemId);
     let page = await Branches.findOne();
     if (!page) {
       return res.status(404).json({ error: "Branch page not found." });

@@ -1,18 +1,14 @@
 const mongoose = require("mongoose");
 
-const reportItemSchema = new mongoose.Schema({
+const reportSchema = new mongoose.Schema({
   title: { type: String, required: true },
-  fileUrl: { type: String, required: true },
-  reportType: {
-    type: String,
-    required: true,
-  },
+  reportFile: { type: String, required: true },
   uploadedAt: { type: Date, default: Date.now },
 });
 
 const reportPageSchema = new mongoose.Schema(
   {
-    reports: [reportItemSchema],
+    reports: { type: Map, of: reportSchema }, // Allows dynamic keys (e.g., "report1", "report2")
   },
   { timestamps: true }
 );
