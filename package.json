@@ -1,0 +1,35 @@
+{
+    "name": "skbbl_api",
+    "version": "1.0.0",
+    "description": "Sana Kisan Bikas Laghubitta Bittiya Sanstha Ltd",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "start": "nodemon index.js"
+    },
+    "author": "Ishwar,Sushant",
+    "license": "ISC",
+    "dependencies": {
+        "bcrypt": "^5.1.1",
+        "chart.js": "^4.4.8",
+        "cors": "^2.8.5",
+        "crypto": "^1.0.1",
+        "dotenv": "^16.4.5",
+        "express": "^4.19.2",
+        "image-size": "^1.2.0",
+        "jsonwebtoken": "^9.0.2",
+        "mongoose": "^8.5.2",
+        "multer": "^1.4.5-lts.1",
+        "nodemailer": "^6.10.0",
+        "nodemon": "^3.1.4",
+        "react-chartjs-2": "^5.3.0",
+        "router": "^1.3.8",
+        "socket.io": "^4.8.1",
+        "stripe": "^17.7.0",
+        "uuid": "^11.0.5",
+        "validator": "^13.12.0"
+    },
+    "devDependencies": {
+        "@types/node": "^22.1.0"
+    }
+}
