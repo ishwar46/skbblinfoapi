@@ -18,7 +18,16 @@ exports.uploadAboutImageMiddleware = (req, res, next) => {
 
 /**
  * GET /api/about
- * Public: Returns the AboutPage document (pageTitle, pageDescription, ourValues, ourVision, ourMission, centralImage, bannerImage)
+ * Public: Returns the AboutPage document ( 
+ *    pageTitle,
+      pageDescription,
+      centralImage,
+      bannerImage,
+      ourVision,
+      ourMission,
+      ourValues,
+      ourObjectives
+      ).
  */
 exports.getAboutPage = async (req, res) => {
   try {
@@ -36,7 +45,16 @@ exports.getAboutPage = async (req, res) => {
 
 /**
  * POST /api/about
- * Admin Only: Update page-level info (pageTitle, pageDescription, ourValues, ourVision, ourMission, centralImage, bannerImage).
+ * Admin Only: Update page-level info (  
+ *    pageTitle,
+      pageDescription,
+      centralImage,
+      bannerImage,
+      ourVision,
+      ourMission,
+      ourValues,
+      ourObjectives
+      ).
  */
 exports.updateAboutPage = async (req, res) => {
   try {
