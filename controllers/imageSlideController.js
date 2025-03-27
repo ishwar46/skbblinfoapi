@@ -42,11 +42,7 @@ exports.createSlide = async (req, res) => {
       await page.save();
     }
 
-    const { title, description, button, order } = req.body;
-
-    if (title !== undefined) page.title = title;
-    if (description !== undefined) page.description = description;
-    if (button !== undefined) page.button = button;
+    const { order } = req.body;
 
     await page.save();
 
