@@ -52,7 +52,7 @@ exports.updatePresidentMessage = async (req, res) => {
     if (ceoTitle !== undefined) page.ceoTitle = ceoTitle;
     if (highlightedText !== undefined) page.highlightedText = highlightedText;
     if (req.file) {
-      page.presidentImage = path.basename(req.file.path);
+      page.ceoImage = req.file.filename;
     }
     await page.save();
     return res.status(200).json({
