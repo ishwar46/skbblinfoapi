@@ -4,7 +4,7 @@ const sizeOf = require("image-size");
 
 // This creates an uploader that stores files under /uploads/projects
 const aboutUsUploader = createUploader("project").fields([
-  { name: "projectLogo", maxCount: 1 },
+  { name: "projectThumbnail", maxCount: 1 },
   { name: "projectImages", maxCount: 5 },
 ]);
 
@@ -106,7 +106,7 @@ exports.addProjectToProjectPage = async (req, res) => {
       descriptionParagraph: Array.isArray(descriptionParagraph)
         ? descriptionParagraph
         : [descriptionParagraph || ""],
-      projectLogo: req.files?.projectLogo?.[0]?.filename || "", // Store project logo
+      projectThumbnail: req.files?.projectThumbnail?.[0]?.filename || "", // Store project logo
       projectImages:
         req.files?.projectImages?.map((file) => file.filename) || [], // Store multiple images
     };

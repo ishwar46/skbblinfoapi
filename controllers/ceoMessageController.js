@@ -3,7 +3,7 @@ const createUploader = require("../middleware/uploader");
 const sizeOf = require("image-size");
 const path = require("path");
 
-// Multer instance for "president" images, storing under /uploads/president
+// Multer instance for "ceo" images, storing under /uploads/ceoImage
 const ceoUploader = createUploader("ceo").single("ceoImage");
 
 exports.uploadCeoImageMiddleware = (req, res, next) => {
@@ -16,10 +16,10 @@ exports.uploadCeoImageMiddleware = (req, res, next) => {
 };
 
 /**
- * GET /api/president-message
+ * GET /api/ceo-message
  * Public: Returns the CeoMessage document (pageTitle, paragraph, ceoTitle, highlightedText)
  */
-exports.getPresidentMessage = async (req, res) => {
+exports.getCeoMessage = async (req, res) => {
   try {
     let page = await CeoMessage.findOne();
     if (!page) {
@@ -31,15 +31,15 @@ exports.getPresidentMessage = async (req, res) => {
     console.error("Get CEO Message Error:", error);
     return res
       .status(500)
-      .json({ error: "Server error fetching president message page." });
+      .json({ error: "Server error fetching ceo message page." });
   }
 };
 
 /**
- * POST /api/president-message
+ * POST /api/ceo-message
  * Admin Only: Update page-level info (pageTitle, paragraph, ceoTitle, highlightedText)
  */
-exports.updatePresidentMessage = async (req, res) => {
+exports.updateCeoMessage = async (req, res) => {
   try {
     const { pageTitle, paragraph, ceoTitle, highlightedText } = req.body;
     let page = await CeoMessage.findOne();
@@ -52,7 +52,7 @@ exports.updatePresidentMessage = async (req, res) => {
     if (ceoTitle !== undefined) page.ceoTitle = ceoTitle;
     if (highlightedText !== undefined) page.highlightedText = highlightedText;
     if (req.file) {
-      page.presidentImage = path.basename(req.file.path);
+      page.ceoImage = req.file.filename;
     }
     await page.save();
     return res.status(200).json({

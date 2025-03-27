@@ -5,7 +5,7 @@ const authMiddleware = require("../middleware/authMiddleware");
 const adminMiddleware = require("../middleware/adminMiddleware");
 
 // Public endpoint to get
-router.get("/", ceoMessageController.getPresidentMessage);
+router.get("/", ceoMessageController.getCeoMessage);
 
 // Admin-only: update page-level info
 router.patch(
@@ -13,7 +13,7 @@ router.patch(
   // authMiddleware,
   // adminMiddleware,
   ceoMessageController.uploadCeoImageMiddleware,
-  ceoMessageController.updatePresidentMessage
+  ceoMessageController.updateCeoMessage
 );
 
 module.exports = router;

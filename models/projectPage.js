@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 const projectSchema = new mongoose.Schema({
-  projectLogo: { type: String, default: "" },
+  projectThumbnail: { type: String, default: "" },
   projectImages: [{ type: String, default: "" }],
   title: { type: String, default: "", required: true },
   descriptionParagraph: [{ type: String, default: "", required: true }],
