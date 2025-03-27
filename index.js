@@ -57,6 +57,7 @@ app.use("/api/dmv-chapter", require("./routes/dmvChapterRoutes"));
 app.use("/api/texas-chapter", require("./routes/texasChapterRoutes"));
 app.use("/api/reports", require("./routes/reportRoutes"));
 app.use("/api/about-us", require("./routes/aboutUsRoutes"));
+app.use("/api/about", require("./routes/aboutRoutes"));
 app.use("/api/interest", require("./routes/interestRatesRoutes"));
 app.use("/api/progress", require("./routes/progressRoutes"));
 app.use("/api/footer", require("./routes/footerRoutes"));
