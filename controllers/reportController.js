@@ -1,13 +1,6 @@
 const ReportPage = require("../models/reportPage");
 const createUploader = require("../middleware/uploader");
 
-const allowedFileTypes = [
-  "Annual Report",
-  "Right to Information",
-  "Quarterly Report",
-  "AGM Minute Report",
-];
-
 //stored under /uploads/reports
 const reportUploader = createUploader("reports").single("reportFile");
 
@@ -44,40 +37,67 @@ exports.getReportPage = async (req, res) => {
   }
 };
 
+/**
+ * PUT /api/reports
+ * Admin-only endpoint: Update the Report page info.
+ * Expected JSON body: { categories }
+ */
+exports.updateReportCategories = async (req, res) => {
+  try {
+    const { categories } = req.body;
+    let page = await ReportPage.findOne();
+    if (!page) {
+      page = new ReportPage();
+    }
+    if (categories !== undefined) page.categories = categories;
+    await page.save();
+    return res.status(200).json({
+      message: "Report categories updated successfully.",
+      page,
+    });
+  } catch (error) {
+    console.error("updateReportCategories Error:", error);
+    return res
+      .status(500)
+      .json({ error: "Server error updating publication page." });
+  }
+};
+
 exports.addReportItem = async (req, res) => {
   try {
-    const { title, fileType } = req.body;
+    const { title, category } = req.body;
     if (!title) {
       return res.status(400).json({ error: "Title is required." });
     }
-    if (!req.file) {
-      return res.status(400).json({ error: "Report file is required." });
+    if (!category) {
+      return res.status(400).json({ error: "Category is required." });
     }
-    if (!allowedFileTypes.includes(fileType)) {
-      return res.status(400).json({ error: "File type not allowed." });
-    }
-
-    let fileUrl = req.file.filename;
 
     let page = await ReportPage.findOne();
+    const categorySet = new Set(page.categories);
+    if (!categorySet.has(category)) {
+      return res
+        .status(400)
+        .json({ error: `Invalid Category ${page.categories}` });
+    }
     if (!page) {
-      page = new ReportPage({ reports: new Map() }); // Initialize reports as an empty Map
+      page = new ReportPage();
+      await page.save();
     }
-
-    if (!page.reports) {
-      page.reports = new Map(); // Ensure reports is initialized
+    let fileUrl = "";
+    if (req.file) {
+      fileUrl = req.file.filename;
+    } else {
+      return res.status(400).json({ error: "Report file is required." });
     }
-
-    page.reports.set(fileType, {
+    page.documents.push({
       title,
-      reportFile: fileUrl,
-      uploadedAt: new Date(),
+      category,
+      fileUrl,
     });
-
     await page.save();
     return res.status(201).json({
       message: "Report added successfully.",
-
       page,
     });
   } catch (error) {
@@ -90,18 +110,25 @@ exports.addReportItem = async (req, res) => {
 
 exports.updateReportItem = async (req, res) => {
   try {
-    const { docId } = req.params;
-    const { title } = req.body;
+    const { itemId } = req.params;
+    const { title, category } = req.body;
     let page = await ReportPage.findOne();
-    if (!page || !page.reports.has(docId)) {
+    if (!page) {
+      return res.status(404).json({ error: "Report page not found." });
+    }
+    const categorySet = new Set(page.categories);
+    if (!categorySet.has(category)) {
+      return res.status(400).json({ error: "Invalid Category" });
+    }
+    const docItem = page.documents.id(itemId);
+    if (!docItem) {
       return res.status(404).json({ error: "Report item not found." });
     }
-    const docItem = page.reports.get(docId);
-    if (title) docItem.title = title;
+    if (title !== undefined) docItem.title = title;
+    if (category !== undefined) docItem.category = category;
     if (req.file) {
-      docItem.reportFile = req.file.filename;
+      docItem.fileUrl = req.file.filename;
     }
-    page.reports.set(docId, docItem);
     await page.save();
     return res.status(200).json({
       message: "Report item updated successfully.",

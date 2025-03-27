@@ -9,7 +9,7 @@ const publicationSchema = new mongoose.Schema({
 
 const publicationPageSchema = new mongoose.Schema(
   {
-    categories: [{ type: String, required: true, unique: true, default:"Downloads" }],
+    categories: [{ type: String, required: true, unique: true }],
     documents: [publicationSchema],
   },
   { timestamps: true }

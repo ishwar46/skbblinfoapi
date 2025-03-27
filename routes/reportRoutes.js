@@ -7,6 +7,14 @@ const adminMiddleware = require("../middleware/adminMiddleware");
 // Public endpoint to get the Documents page details.
 router.get("/", reportController.getReportPage);
 
+// Admin-only endpoint to update page-level info.
+router.post(
+  "/",
+  // authMiddleware,
+  // adminMiddleware,
+  reportController.updateReportCategories
+);
+
 // Admin-only endpoint to add a new document item (with file upload).
 router.post(
   "/items",
@@ -18,7 +26,7 @@ router.post(
 
 // Admin-only endpoint to update an existing document item.
 router.patch(
-  "/items/:docId",
+  "/items/:itemId",
   // authMiddleware,
   // adminMiddleware,
   reportController.uploadReportMiddleware,
@@ -27,7 +35,7 @@ router.patch(
 
 // Admin-only endpoint to delete a document item.
 router.delete(
-  "/items/:docId",
+  "/items/:itemId",
   // authMiddleware,
   // adminMiddleware,
   reportController.deleteReportItem
