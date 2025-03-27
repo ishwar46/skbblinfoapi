@@ -68,6 +68,7 @@ app.use("/api/projects", require("./routes/projectRoutes"));
 app.use("/api/careers", require("./routes/careerRoutes"));
 app.use("/api/syllabus", require("./routes/syllabusRoutes"));
 app.use("/api/orgSummary", require("./routes/orgSummaryRoutes"));
+app.use("/api/publication", require("./routes/publicationRoutes"));
 
 app.use("/api", donationRoutes);
 
