@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const productAndServicesSchema = new mongoose.Schema({
   title: { type: String, required: true },
   descriptionParagraph: [{ type: String, required: true }],
-  logoImage: { type: String, default: "" },
+  programThumbnail: { type: String, default: "" },
   programType: { type: String, enum: ["Loan", "Service"], required: true },
   programImages: [{ type: String, default: "" }],
 });

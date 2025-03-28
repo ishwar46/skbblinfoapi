@@ -3,7 +3,7 @@ const createUploader = require("../middleware/uploader");
 
 // This creates an uploader that stores files under /uploads/page
 const uploadProductImageMiddleware = createUploader("Product").fields([
-  { name: "logoImage", maxCount: 1 },
+  { name: "programThumbnail", maxCount: 1 },
   { name: "programImages", maxCount: 5 },
 ]);
 
@@ -70,7 +70,7 @@ exports.addProjectToProjectPage = async (req, res) => {
         ? descriptionParagraph
         : [descriptionParagraph || ""],
       programType,
-      logoImage: req.files?.logoImage?.[0]?.filename || "",
+      programThumbnail: req.files?.programThumbnail?.[0]?.filename || "",
       programImages:
         req.files?.programImages?.map((file) => file.filename) || [],
     };
@@ -132,8 +132,8 @@ exports.updateProjectPageImage = async (req, res) => {
         : [descriptionParagraph];
 
     // Handle file uploads
-    if (req.files?.logoImage?.length > 0) {
-      projectItem.logoImage = req.files.logoImage[0].filename;
+    if (req.files?.programThumbnail?.length > 0) {
+      projectItem.programThumbnail = req.files.programThumbnail[0].filename;
     }
 
     if (req.files?.programImages?.length > 0) {
