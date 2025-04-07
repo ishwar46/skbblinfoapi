@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Donation Receipt</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      body,
+      p,
+      table,
+      td {
+        margin: 0;
+        padding: 0;
+        font-family: "Poppins", sans-serif;
+        color: #333;
+      }
+      body {
+        background-color: #f7f8fa;
+        font-size: 16px;
+        line-height: 1.5;
+      }
+
+      /* CONTAINER */
+      .email-container {
+        width: 100%;
+        background: #f7f8fa;
+        padding: 40px 0;
+      }
+      .card {
+        max-width: 600px;
+        margin: 0 auto;
+        background: #ffffff;
+        border-radius: 8px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        overflow: hidden;
+      }
+
+      .header {
+        background: orange;
+        text-align: center;
+        padding: 24px 16px;
+        color: #fff;
+      }
+      .header img {
+        max-width: 80px;
+        margin-bottom: 12px;
+      }
+      .header h1 {
+        margin: 0;
+        font-size: 24px;
+      }
+
+      .body {
+        padding: 24px 32px;
+        color: #333;
+      }
+      .body h2 {
+        font-size: 20px;
+        margin-bottom: 12px;
+      }
+      .body p {
+        margin-bottom: 16px;
+      }
+      .amount {
+        font-size: 28px;
+        font-weight: bold;
+        margin: 8px 0 16px;
+        color: #4285f4;
+      }
+      .light-text {
+        color: #666;
+        font-size: 14px;
+      }
+
+      .info-table {
+        width: 100%;
+        margin-bottom: 24px;
+        border-collapse: collapse;
+      }
+      .info-table tr {
+        border-bottom: 1px solid #e8e8e8;
+      }
+      .info-table th,
+      .info-table td {
+        padding: 12px 0;
+        font-size: 14px;
+        text-align: left;
+      }
+      .info-table th {
+        color: #777;
+        width: 40%;
+        font-weight: 400;
+      }
+
+      .download-link {
+        display: inline-block;
+        margin-top: 16px;
+        padding: 10px 20px;
+        background: #eb5757;
+        color: #ffffff !important;
+        text-decoration: none;
+        border-radius: 4px;
+        font-size: 14px;
+      }
+      .download-link:hover {
+        background: #cf4949;
+      }
+
+      .footer {
+        text-align: center;
+        padding: 16px;
+        font-size: 13px;
+        color: #999;
+        border-top: 1px solid #e3e3e3;
+        background: #fdfdfd;
+      }
+      .footer a {
+        color: #999;
+        text-decoration: underline;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="email-container">
+      <div class="card">
+        <!-- HEADER SECTION -->
+        <div class="header">
+          <img
+            src="https://skbbl.com.np/assets/logo-BCCSziXh.png"
+            alt="Sana Kisan Bikas Laghubitta Bittiya Sanstha Ltd Logo"
+          />
+          <h1>Donation Receipt</h1>
+        </div>
+
+        <!-- BODY SECTION -->
+        <div class="body">
+          <h2>Hello {{fullName}},</h2>
+          <p>
+            Thank you for your generous donation. We have received your
+            contribution as detailed below:
+          </p>
+          <div class="amount">$ {{donationAmount}}</div>
+          <p class="light-text">Paid on {{date}}</p>
+
+          <!-- DONATION INFO TABLE -->
+          <table class="info-table">
+            <tr>
+              <th>Payment Reference</th>
+              <td>{{paymentIntentId}}</td>
+            </tr>
+            <tr>
+              <th>Payment Method</th>
+              <td>{{cardBrand}} ending in {{cardLast4}}</td>
+            </tr>
+            <tr>
+              <th>Remarks</th>
+              <td>{{remarks}}</td>
+            </tr>
+            <tr>
+              <th>Tax ID</th>
+              <td>123456789</td>
+            </tr>
+            <tr>
+              <th>Org. Reg. No.</th>
+              <td>987654321</td>
+            </tr>
+          </table>
+
+          <!-- CTA LINK -->
+          <a
+            href="https://skbbl.com.np/"
+            class="download-link"
+            target="_blank"
+            >Download Receipt (PDF)</a
+          >
+        </div>
+
+        <!-- FOOTER SECTION -->
+        <div class="footer">
+          <p>
+            &copy; 2025. SKBBL, All Rights Reserved &bull;
+            <a href="https://skbbl.com.np/" target="_blank"
+              >Visit Our Website</a
+            >
+          </p>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
